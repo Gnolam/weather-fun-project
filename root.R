@@ -8,7 +8,7 @@ ver.num <- "0.03 " # should be 5 symbols
 base::message("     ******************************************************")
 base::message("    ***                                                ***")
 base::message(paste0("   ***  The Weather fun project               v.", ver.num, " ***"))
-base::message("  ***    testing poly function                       ***")
+base::message("  ***    created poly function                       ***")
 base::message(" ***                                                ***")
 base::message("******************************************************")
 }
