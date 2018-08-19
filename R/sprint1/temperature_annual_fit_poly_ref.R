@@ -24,11 +24,11 @@ temperature_annual_fit_poly_ref <- function() {
   debug_message_l2("~> temperature_annual_fit_poly()")
   
   # Load dummy data
-  dat.weather <- suppressMessages(read_csv("./io/input/weather-test-sydney.csv"))
+  dat.weather <- suppressMessages(read_csv("./io/input/temperature_ref_year.csv"))
   
   # Derive x and y from .csv file for transparency
-  x <- dat.weather$i
-  y <- dat.weather$`Sydney weather`
+  x <- dat.weather$month
+  y <- dat.weather$temperature
   
   # Create fit object
   fit <- lm( y~poly(x,14) )
@@ -50,11 +50,11 @@ if (0) {
     
     # Load data
     dat.weather <-
-      suppressMessages(read_csv("./io/input/weather-test-sydney.csv"))
+      suppressMessages(read_csv("./io/input/temperature_ref_year.csv"))
     
     # Derive x and y from .csv file for transparency
-    x <- dat.weather$i
-    y <- dat.weather$`Sydney weather`
+    x <- dat.weather$month
+    y <- dat.weather$temperature
     y_hat <- predict(fit_p14, data.frame(x = x))
     
     plot(x, y, xlim = c(11, 24), ylim = c(14, 32))
