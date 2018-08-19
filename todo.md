@@ -11,19 +11,19 @@ This document serves as a Wiki and a master plan for the project
 ## Key features of the project
 
 - Input means
- - CLI (command line interface)
-  - JSON format would be way easier...
- - RShiny
- - RServ -> http API endpoint?
+  - CLI (command line interface)
+    - JSON format would be way easier...
+  - RShiny
+  - RServ -> http API endpoint?
  
 - Input options
- - 
+  - 
  
  
 - Output
- - Into a file for CLI  
- - Through 'Download' functionality for RShiny
- - No multiple periods assumed at the moment for the sake of time
+  - Into a file for CLI  
+  - Through 'Download' functionality for RShiny
+  - No multiple periods assumed at the moment for the sake of time
 
 ## Current ToDo's: 'now' list
 - [ ] Test if poly approximates annual waether 
