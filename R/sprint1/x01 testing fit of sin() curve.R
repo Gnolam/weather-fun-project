@@ -1,45 +1,63 @@
-base::message(" testig fit poly() curves")
-
-weather <- read_csv("./io/input/weather-test-sydney.csv")
-
-x <- weather$i
-y <- weather$`Sydney weather`
-
-fit_p5 <- lm( y~poly(x,5) )
-fit_p9 <- lm( y~poly(x,9) )
-fit_p14 <- lm( y~poly(x,14) )
+debug_message_l2("adding temperature_annual_fit_poly()")
 
 
-xx <- seq(1,36)
+#' Fit the annual temperature curve using polinomial approximation 
+#' 
+#' @describeIn 
+#' This function is a 'simplified' edition for MVP
+#' It fits the annual 
+#' 
+#' @return
+#' @export
+#' function returns model artifact which can be used by `predict()`` function
+#'
+#' @examples
+#' x <- seq(1,36)
+#' y_hat <- predict(fit_p14, data.frame(x=x))
+#' fit_p14 <- temperature_annual_fit_poly_ref()
+#' 
+#' plot(x,y, xlim=c(11,24), ylim=c(14,32))
+#' lines(x, predict(fit_p14, data.frame(x=x)), col='purple')
+#' 
+temperature_annual_fit_poly_ref <- function() {
+  # Say 'Hi!'
+  debug_message_l2("~> temperature_annual_fit_poly()")
+  
+  # Load dummy data
+  dat.weather <- suppressMessages(read_csv("./io/input/weather-test-sydney.csv"))
+  
+  # Derive x and y from .csv file for transparency
+  x <- dat.weather$i
+  y <- dat.weather$`Sydney weather`
+  
+  # Create fit object
+  fit <- lm( y~poly(x,14) )
+  
+  
+  # ToDo: check RMSE of the resulting model
+  # for the given reference .csv it is being checked manually
+  
+  fit
+}
 
-#lines(xx, predict(fit4, data.frame(x=xx)), col='purple')
-#yy <- predict(fit4, data.frame(x=x))
-
-plot(x,y, xlim=c(11,24), ylim=c(14,32))
-lines(x, predict(fit_p5, data.frame(x=x)), col='blue')
-lines(x, predict(fit_p9, data.frame(x=x)), col='purple')
-lines(x, predict(fit_p14, data.frame(x=x)), col='black')
 
 
-# example -----------------------------------------------------------------
+# Debug section -----------------------------------------------------------
 
-lm.1 <- lm(y ~ x + I(x^2) + I(x^3) + I(x^4) )
-lm.s <- step(lm.1)
-lines(x, predict(lm.s, data.frame(x=x)), col='yellow')
-
-
-
-
-dat = data.frame(
-  x1 = x,
-  x2 = x,
-  x3 = x,
-  x4 = x,
-  x5 = x
-)
-
-lm.2 <- lm(y ~ dat$x1 + cos(dat$x2)*dat$x3)
-
-
-plot(x,y, xlim=c(11,24), ylim=c(14,32))
-lines(x, predict(lm.2, data.frame(x=dat)), col='red')
+if (0) {
+  if (1) {
+    fit_p14 <- temperature_annual_fit_poly_ref()
+    
+    # Load data
+    dat.weather <-
+      suppressMessages(read_csv("./io/input/weather-test-sydney.csv"))
+    
+    # Derive x and y from .csv file for transparency
+    x <- dat.weather$i
+    y <- dat.weather$`Sydney weather`
+    y_hat <- predict(fit_p14, data.frame(x = x))
+    
+    plot(x, y, xlim = c(11, 24), ylim = c(14, 32))
+    lines(xx, predict(fit_p14, data.frame(x = xx)), col = 'purple')
+  }
+}

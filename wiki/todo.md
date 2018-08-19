@@ -2,7 +2,7 @@ this document serves as a 'notepad' for the next actions
 'Trello' is better but...
 
 ## 'Sprint #1': Exploration
-- [ ] Test if poly approximates annual weather 
+- [x] Test if poly approximates annual weather 
 - [ ] Check where to download reliable data for a signle weather station
 - [ ] Prepare the list of weather stations
 - [ ] Come up with the idea how to approximate daily temperature
@@ -40,3 +40,4 @@ The list below serves as a list of features which are 'the must' for MVP.
 The rest can be 'sacraficed' in case of time shortage
 - [ ] Stochastic features
 - [ ] RShiny interface or CLI. Just one of them
+- [ ] All stations will be the 'shift' function of one curve

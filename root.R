@@ -3,7 +3,7 @@ if(1){
   gc()
   cat("\014")  
 
-ver.num <- "0.01 " # should be 5 symbols
+ver.num <- "0.03 " # should be 5 symbols
   
 base::message("     ******************************************************")
 base::message("    ***                                                ***")
@@ -30,8 +30,9 @@ res.status <- tryCatch({
   # Misc functions
   sys$source_Rs(folder =  "R/misc", fn <- new.env())
 
-  # Main sequence
-  
+
+# Main sequence -----------------------------------------------------------
+
   source("R/10 init.R")
 
   
