@@ -2,7 +2,7 @@ this document serves as a 'notepad' for the next actions
 'Trello' is better but...
 
 ## 'Sprint #1': Exploration
-- [ ] Test if poly approximates annual waether 
+- [ ] Test if poly approximates annual weather 
 - [ ] Check where to download reliable data for a signle weather station
 - [ ] Prepare the list of weather stations
 - [ ] Come up with the idea how to approximate daily temperature
