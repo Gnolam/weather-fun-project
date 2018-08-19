@@ -1,40 +1,35 @@
 base::message("Loading R libraries")
 
 
-# Dedine list of packages to be installed and loaded --------------------
 
-list.of.packages <- c(
+# Init --------------------------------------------------------------------
+list_of_required_packages <- c(
   "readr",
   "dplyr",
   "stringr",
   "lubridate",
   "purrr",
   "magrittr",
-  "tidyverse"
+  "tidyverse",
+  "easypackages",
+  "DebugMessageR"
 )
 
-list.of.packages_ext <- c("easypackages", list.of.packages)
+
+# Packages which require special treatment --------------------------------
+sys$install_GitHub_package_if_needed(
+  "DebugMessageR", "Gnolam/DebugMessageR")
 
 
-# Install packages if not present in the system ---------------------------
-
-#Get the list of packages which are NOT part of the current installation 
-new.packages <-
-  list.of.packages[!(list.of.packages_ext %in% installed.packages()[, "Package"])]
-
-# If the length of the 'missing packages' is not empty, pls install them
-if(length(new.packages))
-  install.packages(new.packages)
+# Github packages must be installed by now --------------------------------
+sys$install_packages_if_needed(list_of_required_packages)
 
 
 # Load packages -----------------------------------------------------------
 suppressMessages(suppressWarnings(
-  libraries(
-    list.of.packages
-  )))
-
+  easypackages::libraries(list_of_required_packages)))
 
 
 # Clean garbage -----------------------------------------------------------
-rm(list.of.packages, list.of.packages_ext, new.packages)
+rm(list_of_required_packages)
 # No need for gc() on this stage as it is too clow

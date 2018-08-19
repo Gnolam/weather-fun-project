@@ -1,4 +1,4 @@
-debug_message_l2(" testig fit sin() curves")
+base::message(" testig fit poly() curves")
 
 weather <- read_csv("./io/input/weather-test-sydney.csv")
 

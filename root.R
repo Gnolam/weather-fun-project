@@ -7,8 +7,8 @@ ver.num <- "0.01 " # should be 5 symbols
   
 base::message("     ******************************************************")
 base::message("    ***                                                ***")
-base::message(paste0("   ***  Main title here                       v.", ver.num, " ***"))
-base::message("  ***    comment                                     ***")
+base::message(paste0("   ***  The Weather fun project               v.", ver.num, " ***"))
+base::message("  ***    testing poly function                       ***")
 base::message(" ***                                                ***")
 base::message("******************************************************")
 }
@@ -19,15 +19,19 @@ base::message("******************************************************")
 res.status <- tryCatch({ 
 
 # Load configs and name spaces --------------------------------------------
-  source("R/00 library.R")
   source("R/z1 utils.R")
 
+  # Load libraries
+  source("R/00 library.R")
+  
   # Project params
-  fn.source_Rs("R/config/", cfg <- new.env())
+  sys$source_Rs("R/config/", cfg <- new.env())
 
   # Misc functions
-  fn.source_Rs(folder =  "R/misc", fn <- new.env())
+  sys$source_Rs(folder =  "R/misc", fn <- new.env())
 
+  # Main sequence
+  
   source("R/10 init.R")
 
   

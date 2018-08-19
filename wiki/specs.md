@@ -19,7 +19,7 @@ This document serves as a Wiki and a master plan for the project
 - `--periods` or `--num:` is a number of time points to genereate
 - `--incremental` or `--inc:` is a 'size of incremental step' between periods. 
 
-- Optional input parameters
+### Optional input parameters
 - `--stochastic:` or `--st:`. 'ON' by default. 
 - 'OFF' - values are determenistic and infered from real world data.
 - 'ON' (by default). Permission for a simulator to add random fluctuations for daily parameters. If 'ON' the result will be slightly different each time the data are simulated
@@ -27,7 +27,7 @@ This document serves as a Wiki and a master plan for the project
 
 
 
-- Input params considerations
+### Input params considerations
 - _(!)_ Datetime should be specified in UTC time zone
 - Option for date (instead of datetime) is not considered due to potential confusion with UTC timezone
 - Datetime should be in between year 2000 and 3000
@@ -41,10 +41,7 @@ This document serves as a Wiki and a master plan for the project
 - `year`: years
 
 
-
-
-
-- Output
+## Output
 - Into a file for CLI  
 - Through 'Download' functionality for RShiny
 - No multiple periods assumed at the moment for the sake of time
