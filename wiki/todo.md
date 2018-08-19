@@ -38,3 +38,5 @@ this document serves as a 'notepad' for the next actions
 ## Potential 'Sacrafice' list
 The list below serves as a list of features which are 'the must' for MVP.
 The rest can be 'sacraficed' in case of time shortage
+- [ ] Stochastic features
+- [ ] RShiny interface or CLI. Just one of them
