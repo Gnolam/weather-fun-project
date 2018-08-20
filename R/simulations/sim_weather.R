@@ -11,6 +11,7 @@ debug_message_l2("adding sim_weather() v1")
 #' @param chr_dt pass this param if it is more convenient to leave the checks to a function
 #' @param dt a valid POSIXt date 
 #' @param coord a list of 3 variables : lat, lon, alt. All numberic. 
+#' @param random_factor specs of the randomness for temperature cals
 #'
 #' @return list object. in v1 just temperature inside
 #' @export
@@ -19,11 +20,8 @@ debug_message_l2("adding sim_weather() v1")
 sim_weather <- function(
     chr_dt = NULL, 
     dt = NULL,
-    coord = list(
-      lat = 0, # -90..+90
-      lon = 0, # -90..+90
-      alt = 0  # 0..9000 (in meters)
-    )
+    coord = list(),
+    random_factor = list()
   ){
   # Hi!
   debug_message_l2("~> sim_weather()")
@@ -99,6 +97,15 @@ sim_weather <- function(
   )
   
   
+
+# Check random factor input -----------------------------------------------
+  stopifnot(
+    class(random_factor) == "list",
+    class(random_factor$annual_shift) %in% c("numeric", "integer"),
+    class(random_factor$annual_scale) %in% c("numeric", "integer"),
+    class(random_factor$daily_scale) %in% c("numeric", "integer")
+  )
+  
   
 
 # Relative position within month ------------------------------------------
@@ -126,7 +133,7 @@ sim_weather <- function(
     as.duration(seconds(1))/3600
   
   # the shift by +24 is due to implementation of the poly fitting method
-  temperature_daily <- predict(cfg$fit$daily, data.frame(x = rel_hour_within_day + 24))
+  relative_temperature_daily <- predict(cfg$fit$daily, data.frame(x = rel_hour_within_day + 24))
   
 
 
@@ -149,39 +156,65 @@ sim_weather <- function(
   # Formula is taken from: https://sciencing.com/tutorial-calculate-altitude-temperature-8788701.html
   temperature_altitude <- coord$alt / 1000 * cfg$altitude_modifier
   
-  
 
-# Adding stochastic -------------------------------------------------------
-  # It is specific for each station
-  annual_shift <- runif(
-    n = 1,
-    min = -cfg$stochastics$annual$shift,
-    max = cfg$stochastics$annual$scale
-  )
-  
-  annual_scale <- runif(
-    n = 1,
-    min = -cfg$stochastics$annual$scale,
-    max = cfg$stochastics$annual$scale
-  ) + 1
-  
-  daily_scale <- runif(
-    n = 1,
-    min = -cfg$stochastics$daily$scale,
-    max = cfg$stochastics$daily$scale
-  ) + 1
-  
   
 # pack into final temperature estimation ----------------------------------
   final_temperature_prediction <-
-    temperature_annual * annual_scale + annual_shift
-    temperature_daily  * daily_scale +
+    temperature_annual * random_factor$annual_scale + random_factor$annual_shift +
+    relative_temperature_daily  * random_factor$daily_scale +
     temperature_latitude +
     temperature_altitude
   
   final_temperature_prediction %<>% round(digits = 1)
   
-  return(final_temperature_prediction)
+
+# Conditions --------------------------------------------------------------
+
+  is_clear_weather <- runif(n = 1, min = 0, max = 100) > 25
+  conditions_str <- ifelse(
+    is_clear_weather,
+    "Clear",
+    ifelse(
+      final_temperature_prediction > 0,
+      "Rain",
+      "Snow"
+    )
+  )
+
+# Humidity ----------------------------------------------------------------
+
+#  change in humidity is defined as proportional to 
+#    negative change in temperature temperature
+  humidity = (6 - relative_temperature_daily) * 10 
+
+# If water falls from the sky... well, it should be WET  
+  humidity <- ifelse(
+    is_clear_weather,
+    humidity,
+    humidity + 20
+  )
+  
+  # Cap for extreme values
+  humidity <- max(0, humidity)
+  humidity <- min(100, humidity)
+
+
+# Pressure ----------------------------------------------------------------
+
+  atm_pressure <- 
+    1100 +                                     # base value
+    runif(n = 1, min = -20,max = 20) +         # boring without random
+    ifelse(is_clear_weather, 0, -100) +        # if rain then less
+    coord$alt * cfg$pressure_altitude_decrease # should be dropping with height
+     
+  
+  data.frame(
+    local_time = dt,
+    conditions = conditions_str,
+    temperature = final_temperature_prediction,
+    pressure = atm_pressure,
+    humidity = humidity 
+  )
 }
 
 

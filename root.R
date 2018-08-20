@@ -1,14 +1,14 @@
-if(1){
-  rm(list=ls())
+if (1) {
+  rm(list = ls())
   gc()
   cat("\014")  
 
-ver.num <- "0.06 " # should be 5 symbols
+ver.num <- "0.07 " # should be 5 symbols
   
 base::message("     ******************************************************")
 base::message("    ***                                                ***")
 base::message(paste0("   ***  The Weather fun project               v.", ver.num, " ***"))
-base::message("  ***    implementing [2].sp5 card                   ***")
+base::message("  ***    implementing [2].sp6 card                   ***")
 base::message(" ***                                                ***")
 base::message("******************************************************")
 }

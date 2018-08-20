@@ -23,8 +23,33 @@ sim_weather_1_station <- function(
     lon = stations_match$Lon,
     alt = stations_match$Alt
   )
+
+# generate stochastics ----------------------------------------------------
+
+  # Adding stochastic -------------------------------------------------------
+  # It is specific for each station
+  random_factor <- list(
+    annual_shift = runif(
+      n = 1,
+      min = -cfg$stochastics$annual$shift,
+      max = cfg$stochastics$annual$scale
+    ),
+    
+    annual_scale = runif(
+      n = 1,
+      min = -cfg$stochastics$annual$scale,
+      max = cfg$stochastics$annual$scale
+    ) + 1,
+    
+    daily_scale = runif(
+      n = 1,
+      min = -cfg$stochastics$daily$scale,
+      max = cfg$stochastics$daily$scale
+    ) + 1
+  )
+    
   
-  sim_weather(dt = dt, coord = coord)
+  sim_weather(dt = dt, coord = coord, random_factor = random_factor)
 }
 
 
@@ -40,8 +65,11 @@ if (0) {
     dt = ymd_hms("2018-02-17 01:05:11"),
     IATA_code = "SYD")
   
-  if(0){
-    
+  sim$sim_weather_1_station(
+    dt = ymd_hms("2018-07-17 00:05:11"),
+    IATA_code = "HBA")
+  
+  if (1) {
     dt = ymd_hms("2018-07-17 01:05:11")
     IATA_code = "HBA"
   }

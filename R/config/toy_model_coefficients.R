@@ -7,7 +7,7 @@ debug_message_l2("[setup] toy-model coefficients")
 # We ignore here presence of the deserts etc.
 # for each 1 degree in latitude we assume the temperature changes by .5 degree
 # Thus Darwin is ~10 warmer vs Sydney
-latitude_modifier <- .5 # C/degree of latitude (valid for South hemisphere)
+latitude_modifier <- 1 # C/degree of latitude (valid for South hemisphere)
 
 
 # Altitude - temperature relationship
@@ -27,3 +27,7 @@ stochastics <- list(
     scale = .2 # +/- 10%
   )
 )
+
+
+# Decay of pressure with altitude
+pressure_altitude_decrease = -0.05
