@@ -1,0 +1,7 @@
+{
+  "file_name": "120 seconds.csv",
+  "csv_header": [true],
+  "from_date_time": ["2019-07-17 01:05:11"],
+  "number_of_steps": [120],
+  "step_size": "secs"
+}

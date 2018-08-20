@@ -1,0 +1,7 @@
+{
+  "file_name": "test.csv",
+  "csv_header": [true],
+  "from_date_time": ["2018-02-17 01:05:11"],
+  "number_of_steps": [10],
+  "step_size": "days"
+}

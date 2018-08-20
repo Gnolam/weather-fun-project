@@ -44,7 +44,7 @@ process_single_task <- function(fname) {
   
   stopifnot(
     class(step_size) == "character",
-    step_size %in% c("day", "minute", "second", "hour", "month", "year"))
+    step_size %in% c("days", "mins", "secs", "hours", "months", "years"))
   
   step_size_interval <- lubridate::period(num = step_size, units = step_size)
   
@@ -86,8 +86,8 @@ if (0) {
       file_name = "test.csv",
       csv_header = TRUE,
       from_date_time = "2018-02-17 01:05:11",
-      number_of_steps = 10,
-      step_size = "seconds"
+      number_of_steps = 120,
+      step_size = "secs"
     )
     
     current_task %>% 
