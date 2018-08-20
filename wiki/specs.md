@@ -28,13 +28,25 @@ where
  - `temperature_altitude` - with the increase of latitude the temperature permanently drops by X degrees (defined by the config file)
 
 
+## Conditions
+
+Conditions are considered random event. On average 5 rainy days a month. Separately and independently for each station
+For the sake of coding time let's have it random for each point generated with probablity of rain/snow of 10%
+
+
 ## Humidity
 
 `humidity` ~ change in humidity is defined as proportional to negative change in temperature temperature
 
 Meaing the lower the temperature the higher is humidity and other way round
 
+Also humidity is higher if it is raining
 
+__(!)__ Not sure how humidity should behave under negative temperature
+
+
+## Atmosphere pressure
+Atmosphere pressure was left constant for simplicity
 
 
 - [ ] Specify columns which can be defined in the functional form - 'control variables'

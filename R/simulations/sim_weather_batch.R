@@ -39,4 +39,10 @@ if (0) {
   sim$sim_weather_1_station(
     dt = ymd_hms("2018-02-17 01:05:11"),
     IATA_code = "SYD")
+  
+  if(0){
+    
+    dt = ymd_hms("2018-07-17 01:05:11")
+    IATA_code = "HBA"
+  }
 }

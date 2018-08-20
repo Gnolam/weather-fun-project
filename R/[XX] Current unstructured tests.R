@@ -13,6 +13,14 @@ cat(
 )
 
 
+
+
+cat(
+  '[1].sp5 test output for `sim_weather(2018-02-17 01:05:11, SYD)`: ',
+  sim$sim_weather_1_station(ymd_hms("2018-08-17 01:05:11"), IATA_code = "HBA"),
+  "\n"
+)
+
 # Debug section -----------------------------------------------------------
 
 #lubridate::ymd_hms("2018-02-17T01:05:11Z")
