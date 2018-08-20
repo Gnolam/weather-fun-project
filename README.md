@@ -62,7 +62,7 @@ SYD|-33.95,151.18,9|2018-02-19T01:05:11Z|Clear|+23.3|1118.3|77.0
 # Toy model
 - [x]  Outline key 'toy-model' assumptions
 
-# lat, lon, alt - the geo coordinates
+## lat, lon, alt - the geo coordinates
 coordinate tripple (lat, lon, alt) is a given constant for each station
 
 ## Temperature
