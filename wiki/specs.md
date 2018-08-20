@@ -1,7 +1,42 @@
 This document serves as a Wiki and a master plan for the project
 
-## Toy model
-- [ ]  Outline key 'toy-model' assumptions
+# Toy model
+- [x]  Outline key 'toy-model' assumptions
+coordinate tripple (lat, lon, alt) is a given constant for each station
+
+## Temperature
+For the sake of simplicity is defined as
+`temperature` = f(`latitude`, `altitude`, `stochastic actors` , `datetime` )
+_Note:_ year is ignored, only within-year and within-day fluctuations are taken into account
+
+
+```R
+  final_temperature_prediction <-
+    temperature_annual * annual_scale + annual_shift
+    temperature_daily  * daily_scale +
+    temperature_latitude +
+    temperature_altitude
+```
+
+where
+
+- `temperature_annual` - deterministic function. Uses reference annual temperature curve
+- `annual_scale` + `annual_shift` are the stochastic factors. E.g. +/- 5 degrees and +/- 10% to the annual curve (defined by the config file)
+- `temperature_daily` - similar to annual curve this one define sdaily fluctuations of the temperature
+- `daily_scale` - random magnitude factor. Can scale or shrink the daily curve within some % (defined by the config file)
+ - `temperature_latitude` for each 1 degree in latitude we assume the temperature changes by .5 degree (defined by the config file)
+ - `temperature_altitude` - with the increase of latitude the temperature permanently drops by X degrees (defined by the config file)
+
+
+## Humidity
+
+`humidity` ~ change in humidity is defined as proportional to negative change in temperature temperature
+
+Meaing the lower the temperature the higher is humidity and other way round
+
+
+
+
 - [ ] Specify columns which can be defined in the functional form - 'control variables'
 - [ ] Specify columns which will be left as a 'state variables'. I.e. exogeneously given
 
