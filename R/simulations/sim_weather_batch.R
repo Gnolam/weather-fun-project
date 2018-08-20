@@ -1,56 +1,59 @@
 
+# main function -----------------------------------------------------------
 
-sim_weather_1_station <- function(
-  IATA_code,
-  dt
+sim_weather_batch <- function(
+  list_of_stations = "_ALL_", # "_ALL_" means for all stations
+  params
 ) {
-# Hi!
-  #stopifnot(IATA)
-  # externalise validate / convert time
+  # Hi!
+  debug_message_l2("sim_weather_batch(", paste0(list_of_stations, collapse = ", "), ")")
+
+
+# Genrate sequence of dates -----------------------------------------------
+  dt_sequence <- seq(
+    params$dt,
+    params$dt %m+% params$num_steps,
+    by = params$step_size)
   
 
-# locate station in DB ----------------------------------------------------
-  stations_match <- cfg$stations %>% 
-    filter(IATA == IATA_code)
-
-# Check if the result is unique and if any --------------------------------
-  stations_match_number <- dim(stations_match)[[1]]
-  stopifnot(stations_match_number == 1)
+# Generate sequence of stations -------------------------------------------
+  satition_sequence <- list_of_stations
+  if (length(list_of_stations) == 1) {
+    if (list_of_stations == "_ALL_") {
+      satition_sequence <- cfg$stations$IATA
+    }
+  }
   
-# Only 1 match found, proceed ---------------------------------------------
-  coord <- list(
-    lat = stations_match$Lat,
-    lon = stations_match$Lon,
-    alt = stations_match$Alt
-  )
 
-# generate stochastics ----------------------------------------------------
+# Loop and merge ----------------------------------------------------------
 
-  # Adding stochastic -------------------------------------------------------
-  # It is specific for each station
-  random_factor <- list(
-    annual_shift = runif(
-      n = 1,
-      min = -cfg$stochastics$annual$shift,
-      max = cfg$stochastics$annual$scale
-    ),
-    
-    annual_scale = runif(
-      n = 1,
-      min = -cfg$stochastics$annual$scale,
-      max = cfg$stochastics$annual$scale
-    ) + 1,
-    
-    daily_scale = runif(
-      n = 1,
-      min = -cfg$stochastics$daily$scale,
-      max = cfg$stochastics$daily$scale
-    ) + 1
-  )
-    
+  # Purrr and lapply constructions are not used because
+  # - they are more difficult to debug
+  # - no gain in efficiency in this particular case
   
-  sim_weather(dt = dt, coord = coord, random_factor = random_factor)
+  all_stations_result <- NULL
+  
+  for (station in satition_sequence) {
+    # station <- satition_sequence[1]
+    station_result <- sim_weather_1_station(
+      IATA_code = station,
+      dt_sequence = dt_sequence
+      )
+    
+    # Stack the results
+    if (is.null(all_stations_result)) {
+      # 1st entry
+      all_stations_result <- station_result
+    } else {
+      # Stack to previous
+      all_stations_result %<>% rbind(station_result)
+    }
+  }
+  all_stations_result
 }
+    
+    
+
 
 
 # Debug section -----------------------------------------------------------
@@ -73,4 +76,16 @@ if (0) {
     dt = ymd_hms("2018-07-17 01:05:11")
     IATA_code = "HBA"
   }
+  
+  params <- list(
+    dt = ymd_hms("2018-02-17 01:05:11"),
+    num_steps = days(5),
+    step_size = "1 day"
+  )
+  list_of_stations <- c("_ALL_")
+  
+  res <- sim_weather_batch(
+    list_of_stations = list_of_stations,
+    params = params
+  )
 }

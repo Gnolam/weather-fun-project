@@ -24,7 +24,7 @@ sim_weather <- function(
     random_factor = list()
   ){
   # Hi!
-  debug_message_l2("~> sim_weather()")
+#  debug_message_l2("~> sim_weather()")
   
 
   # Select one of 2 options which will be used for input
