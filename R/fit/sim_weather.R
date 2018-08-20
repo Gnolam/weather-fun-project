@@ -135,12 +135,36 @@ sim_weather <- function(
   temperature_altitude <- coord$alt / 1000 * cfg$altitude_modifier
   
   
+
+# Adding stochastic -------------------------------------------------------
+  # It is specific for each station
+  annual_shift <- runif(
+    n = 1,
+    min = -cfg$stochastics$annual$shift,
+    max = cfg$stochastics$annual$scale
+  )
+  
+  annual_scale <- runif(
+    n = 1,
+    min = -cfg$stochastics$annual$scale,
+    max = cfg$stochastics$annual$scale
+  ) + 1
+  
+  daily_scale <- runif(
+    n = 1,
+    min = -cfg$stochastics$daily$scale,
+    max = cfg$stochastics$daily$scale
+  ) + 1
+  
+  
 # pack into final temperature estimation ----------------------------------
   final_temperature_prediction <-
-    temperature_annual +
-    temperature_daily +
+    temperature_annual * annual_scale + annual_shift
+    temperature_daily  * daily_scale +
     temperature_latitude +
     temperature_altitude
+  
+  final_temperature_prediction %<>% round(digits = 1)
   
   return(final_temperature_prediction)
 }

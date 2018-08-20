@@ -1,0 +1,12 @@
+IATA,Name,Lat,Lon,Alt,TZ
+CBR,Canberra International Airport  (CBR),-35.3069,149.1950073,575,Australia/Sydney (GMT +10:00)
+SYD,Sydney Kingsford Smith International Airport (SYD),-33.9460983,151.177002,9,Australia/Sydney (GMT +10:00)
+BNE,Brisbane International Airport (BNE),-27.3841991,153.1170044,4,Australia/Brisbane (GMT +10:00)
+MEL,Melbourne International Airport (MEL),-37.6733017,144.8430023,132,Australia/Melbourne (GMT +10:00)
+ADL,Adelaide International Airport (ADL),-34.9449997,138.5310059,6,Australia/Adelaide (GMT +9.5:00)
+PER,Perth International Airport (PER),-31.9403,115.9670029,20,Australia/Perth (GMT +8:00)
+OOL,Gold Coast Airport (OOL),-28.1644001,153.5050049,6,Australia/Brisbane (GMT +10:00)
+CNS,Cairns International (CNS),-16.8857994,145.7550049,3,Australia/Brisbane (GMT +10:00)
+HBA,Hobart International Airport (HBA),-42.8361015,147.5099945,5,Australia/Hobart (GMT +10:00)
+ISA,Mount Isa Airport (ISA),-20.6639004,139.4889984,342,Australia/Brisbane (GMT +10:00)
+DRW,Darwin International Airport (DRW),-12.4146996,130.8769989,31,Australia/Darwin (GMT +9.5:00)

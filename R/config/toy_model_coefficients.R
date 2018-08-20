@@ -21,7 +21,7 @@ altitude_modifier <- -6.5 # C/km
 stochastics <- list(
   annual = list(
     shift = 5,  # +/- 5 degrees
-    scale = .05 # +/- 2.5%
+    scale = .05 # +/- 5%
   ),
   daily = list(
     scale = .2 # +/- 10%

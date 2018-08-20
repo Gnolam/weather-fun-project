@@ -3,12 +3,12 @@ if(1){
   gc()
   cat("\014")  
 
-ver.num <- "0.04 " # should be 5 symbols
+ver.num <- "0.05 " # should be 5 symbols
   
 base::message("     ******************************************************")
 base::message("    ***                                                ***")
 base::message(paste0("   ***  The Weather fun project               v.", ver.num, " ***"))
-base::message("  ***    implementing [1].sp2 ticket                 ***")
+base::message("  ***    implementing [1].sp4 ticket                 ***")
 base::message(" ***                                                ***")
 base::message("******************************************************")
 }
