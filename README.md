@@ -93,6 +93,20 @@ Also humidity is higher if it is raining
 
 __(!)__ Not sure how humidity should behave under negative temperature
 
+```R
+
+  is_clear_weather <- runif(n = 1, min = 0, max = 100) > 25
+  conditions_str <- ifelse(
+    is_clear_weather,
+    "Clear",
+    ifelse(
+      final_temperature_prediction > 0,
+      "Rain",
+      "Snow"
+    )
+```
+
+
 
 ## Atmosphere pressure
 Atmosphere pressure was left constant for simplicity with tiny random changes and drop in pressure due to rains and small decrease with elevation
