@@ -16,6 +16,7 @@ This document serves as a Wiki and a master plan for the project
   
   - Required input parameters
 - `--datetime:` or `--dt:` is a starting date time. Time should be "TMD HMS" format
+    _a  POSIXct date-time objects_
 - `--periods` or `--num:` is a number of time points to genereate
 - `--incremental` or `--inc:` is a 'size of incremental step' between periods. 
 
@@ -45,3 +46,7 @@ This document serves as a Wiki and a master plan for the project
 - Into a file for CLI  
 - Through 'Download' functionality for RShiny
 - No multiple periods assumed at the moment for the sake of time
+
+
+## Working notes
+Year part is ignored in the simulation. Only part of the year and part of the day

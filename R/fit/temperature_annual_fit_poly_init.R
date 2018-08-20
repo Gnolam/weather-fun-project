@@ -1,9 +1,8 @@
-debug_message_l2("adding temperature_annual_fit_poly()")
+debug_message_l2("adding temperature_annual_fit_poly_init()")
 
 
 #' Fit the annual temperature curve using polinomial approximation 
 #' 
-#' @describeIn 
 #' This function is a 'simplified' edition for MVP
 #' It fits the annual 
 #' 
@@ -19,7 +18,7 @@ debug_message_l2("adding temperature_annual_fit_poly()")
 #' plot(x,y, xlim=c(11,24), ylim=c(14,32))
 #' lines(x, predict(fit_p14, data.frame(x=x)), col='purple')
 #' 
-temperature_annual_fit_poly_ref <- function() {
+temperature_annual_fit_poly_init <- function() {
   # Say 'Hi!'
   debug_message_l2("~> temperature_annual_fit_poly()")
   
@@ -31,8 +30,7 @@ temperature_annual_fit_poly_ref <- function() {
   y <- dat.weather$temperature
   
   # Create fit object
-  fit <- lm( y~poly(x,14) )
-  
+  fit <- lm(y ~ poly(x, 14))
   
   # ToDo: check RMSE of the resulting model
   # for the given reference .csv it is being checked manually

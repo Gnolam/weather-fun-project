@@ -1,4 +1,4 @@
-debug_message_l2("adding temperature_daily_fit_poly_ref()")
+debug_message_l2("adding temperature_daily_fit_poly_init()")
 
 
 #' Fit the annual temperature curve using polinomial approximation 
@@ -19,7 +19,7 @@ debug_message_l2("adding temperature_daily_fit_poly_ref()")
 #' plot(x,y, xlim=c(11,24), ylim=c(14,32))
 #' lines(x, predict(fit_p14, data.frame(x=x)), col='purple')
 #' 
-temperature_daily_fit_poly_ref <- function() {
+temperature_daily_fit_poly_init <- function() {
   # Say 'Hi!'
   debug_message_l2("~> temperature_daily_fit_poly_ref()")
   
