@@ -33,7 +33,6 @@ res.status <- tryCatch({
   # All functions related to curve fitting and approximation
   sys$source_Rs(folder =  "R/fit", fit <- new.env())
   
-
   # All functions related to curve fitting and approximation
   sys$source_Rs(folder =  "R/simulations/", sim <- new.env())
   
@@ -45,6 +44,7 @@ res.status <- tryCatch({
   
   source("R/[XX] Current unstructured tests.R")
   
+  source("R/20 Task processing.R")
   
   TRUE
 },
@@ -61,7 +61,7 @@ error = function(e) {
 
 if (!res.status) {
   # Oops, error detected
-  fn.sessionInfo()
+  sys$sessionInfo()
   
   # Stop is important here as external schedulers need to be aware 
   #   of the unprocessedfatal error

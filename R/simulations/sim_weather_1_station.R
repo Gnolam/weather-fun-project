@@ -1,3 +1,5 @@
+debug_message_l2("adding sim_weather_1_station()")
+
 #' Part of the batch processing. Processes single station
 #'
 #' @param dt_sequence vector of dates

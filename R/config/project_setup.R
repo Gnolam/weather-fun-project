@@ -6,6 +6,7 @@ debug_message_l2("[setup] project definition")
 io.folder <- 
   list(
     input = "io/input/",
+    tasks = "io/task/",
     output = "io/output/"
 )
 

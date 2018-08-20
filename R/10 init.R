@@ -8,10 +8,9 @@ options(stringsAsFactors = FALSE)
 
 
 # Create output folders ---------------------------------------------------
-if (1) {
-  fn$dir.create_if_does_not_exist(cfg$io.folder$input, clean_it = FALSE)
-  fn$dir.create_if_does_not_exist(cfg$io.folder$output, clean_it = TRUE)
-}
+fn$dir.create_if_does_not_exist(cfg$io.folder$input, clean_it = FALSE)
+fn$dir.create_if_does_not_exist(cfg$io.folder$tasks, clean_it = FALSE)
+fn$dir.create_if_does_not_exist(cfg$io.folder$output, clean_it = TRUE)
 
 # Create lm() fit objects -------------------------------------------------
 

@@ -8,7 +8,7 @@ list_of_required_packages <- c(
   "dplyr",
   "stringr",
   "lubridate",
-  "purrr",
+  "jsonlite",
   "magrittr",
   "tidyverse",
   "easypackages",

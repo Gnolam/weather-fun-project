@@ -1,6 +1,16 @@
+debug_message_l2("adding sim_weather_batch()")
 
 # main function -----------------------------------------------------------
 
+#' Loop through the stations and produce simulations for all of them
+#'
+#' @param list_of_stations currently only "ALL" is supported trough JSON
+#' @param params expexts dt, num_steps, step_size
+#'
+#' @return
+#' @export
+#'
+#' @examples
 sim_weather_batch <- function(
   list_of_stations = "_ALL_", # "_ALL_" means for all stations
   params
