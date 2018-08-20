@@ -46,7 +46,8 @@ process_single_task <- function(fname) {
     class(step_size) == "character",
     step_size %in% c("days", "mins", "secs", "hours", "months", "years"))
   
-  step_size_interval <- lubridate::period(num = step_size, units = step_size)
+  step_size_interval <- 
+    lubridate::period(num_steps,  step_size)
   
   
   params <- list(
