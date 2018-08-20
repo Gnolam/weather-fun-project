@@ -61,7 +61,7 @@ error = function(e) {
 
 if (!res.status) {
   # Oops, error detected
-  sys$sessionInfo()
+  #sys$sessionInfo()
   
   # Stop is important here as external schedulers need to be aware 
   #   of the unprocessedfatal error

@@ -69,11 +69,13 @@ sim_weather_1_station <- function(
   station_result <- NULL  
   for (i in 1:length(dt_sequence)) {
     dt <- dt_sequence[i]
-    point.result <-
-      sim_weather(
-        dt = dt,
-        coord = coord,
-        random_factor = random_factor)
+    suppressMessages(
+      point.result <-
+        sim_weather(
+          dt = dt,
+          coord = coord,
+          random_factor = random_factor)
+    )
     
     if (is.null(station_result)) {
       # 1st record

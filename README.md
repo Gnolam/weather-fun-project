@@ -20,7 +20,7 @@ Hers is the example of the task file:
 ```JSON
 {
   "file_name": "10 days exampe.csv",
-  "csv_header": true,
+  "csv_header": [true],
   "from_date_time": "2018-02-17 01:05:11",
   "number_of_steps": 10,
   "step_size": "days"
@@ -32,6 +32,24 @@ per EACH of the station defined in the `io/input/weather_stations.csv` database.
 `from_date_time` must be in date-time format.
 
 `step_size` can be in one of the following types: "days", "mins", "secs", "hours", "months", "years"
+
+Example of the several lines of the output file 
+```
+CBR|-35.31,149.2,575|2018-02-17T01:05:11Z|Clear|+18.9|1070.1|77.0
+CBR|-35.31,149.2,575|2018-02-18T01:05:11Z|Clear|+18.9|1054.4|77.0
+CBR|-35.31,149.2,575|2018-02-19T01:05:11Z|Clear|+18.8|1072.1|77.0
+CBR|-35.31,149.2,575|2018-02-20T01:05:11Z|Clear|+18.7|1057.4|77.0
+CBR|-35.31,149.2,575|2018-02-21T01:05:11Z|Rain|+18.7|976.2|97.0
+CBR|-35.31,149.2,575|2018-02-22T01:05:11Z|Clear|+18.6|1085.9|77.0
+CBR|-35.31,149.2,575|2018-02-23T01:05:11Z|Clear|+18.5|1052.7|77.0
+CBR|-35.31,149.2,575|2018-02-24T01:05:11Z|Rain|+18.4|980.6|97.0
+CBR|-35.31,149.2,575|2018-02-25T01:05:11Z|Clear|+18.4|1054.3|77.0
+CBR|-35.31,149.2,575|2018-02-26T01:05:11Z|Rain|+18.3|967.0|97.0
+CBR|-35.31,149.2,575|2018-02-27T01:05:11Z|Clear|+18.2|1058.8|77.0
+SYD|-33.95,151.18,9|2018-02-17T01:05:11Z|Clear|+23.4|1103.7|77.0
+SYD|-33.95,151.18,9|2018-02-18T01:05:11Z|Rain|+23.4|1007.0|97.0
+SYD|-33.95,151.18,9|2018-02-19T01:05:11Z|Clear|+23.3|1118.3|77.0
+```
 
 
 * * *

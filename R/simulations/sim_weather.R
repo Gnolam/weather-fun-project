@@ -92,10 +92,12 @@ sim_weather <- function(
   
 # Relative position within day --------------------------------------------
   # Find the 'relative position'
+  
+  
   rel_hour_within_day = 
     as.duration(
       interval(
-        floor_date(dt,unit = "days"),
+        floor_date(dt,unit = "day"),
         dt)
       ) %/%
     as.duration(seconds(1))/3600

@@ -37,14 +37,18 @@ process_single_task <- function(fname) {
   if (!file.remove(fname_output))
     stop(paste0("Cannot remove temporary file: ", fname_output))
   
-    
+
+# checking headers --------------------------------------------------------
+
+  stopifnot(class(current_task$csv_header) == "logical")
+
   
 # detecting time period and converting it into interval -------------------
   step_size <- current_task$step_size
   
   stopifnot(
     class(step_size) == "character",
-    step_size %in% c("days", "mins", "secs", "hours", "months", "years"))
+    step_size %in% c("day", "mins", "secs", "hours", "month", "year"))
   
   step_size_interval <- 
     lubridate::period(num_steps,  step_size)
@@ -64,13 +68,18 @@ process_single_task <- function(fname) {
 
 # Exporting the results ---------------------------------------------------
   res %>%  
+    mutate(
+      humidity = round(humidity, digits = 0),
+      pressure = round(pressure, digits = 1),
+      temperature = paste0(ifelse(temperature<0,"","+"),as.character(temperature))
+    ) %>% 
     select(
       station, triplet, local_time, conditions, temperature, pressure, humidity
     ) %>%  
-    write_csv(
+    write_delim(
     path = fname_output,
-    col_names = TRUE 
-    
+    col_names = current_task$csv_header,
+    delim = "|"
   )  
   
   
