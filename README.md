@@ -23,7 +23,7 @@ Hers is the example of the task file:
   "csv_header": [true],
   "from_date_time": "2018-02-17 01:05:11",
   "number_of_steps": 10,
-  "step_size": "days"
+  "step_size": "day"
 }
 ```
 In the example above the file `10 days exampe.csv` will be created in tho `io/output` folder and it will have 11 days of weather simulations in tolal
@@ -31,7 +31,7 @@ per EACH of the station defined in the `io/input/weather_stations.csv` database.
 
 `from_date_time` must be in date-time format.
 
-`step_size` can be in one of the following types: "days", "mins", "secs", "hours", "months", "years"
+`step_size` can be in one of the following types: "day", "mins", "secs", "hours", "month", "year". Yes, there is an inconsistency here in notations but... life is not perfect. 
 
 `csv_header` regulates if we want to add the header to an output file.
 Please not that many systems __require__ header-less files in order to 
