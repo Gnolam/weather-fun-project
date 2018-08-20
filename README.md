@@ -6,7 +6,7 @@ This document serves as a Wiki and a master plan for the project
 
 ### How to execute the script
 Under Linux machine the following should execute the project
-```
+```sh
 Rscript root.R
 ```
 
@@ -61,11 +61,13 @@ SYD|-33.95,151.18,9|2018-02-19T01:05:11Z|Clear|+23.3|1118.3|77.0
 
 # Toy model
 - [x]  Outline key 'toy-model' assumptions
+
+# lat, lon, alt - the geo coordinates
 coordinate tripple (lat, lon, alt) is a given constant for each station
 
 ## Temperature
 For the sake of simplicity is defined as
-`temperature` = f(`latitude`, `altitude`, `stochastic actors` , `datetime` )
+`temperature` = f(`latitude`, `altitude`, `stochastic factors` , `datetime` )
 _Note:_ year is ignored, only within-year and within-day fluctuations are taken into account
 
 
@@ -116,24 +118,28 @@ Also humidity is higher if it is raining
 __(!)__ Not sure how humidity should behave under negative temperature
 
 ```R
+#  change in humidity is defined as proportional to 
+#    negative change in temperature temperature
+  humidity = (6 - relative_temperature_daily) * 10 
 
-  is_clear_weather <- runif(n = 1, min = 0, max = 100) > 25
-  conditions_str <- ifelse(
+# If water falls from the sky... well, it should be WET  
+  humidity <- ifelse(
     is_clear_weather,
-    "Clear",
-    ifelse(
-      final_temperature_prediction > 0,
-      "Rain",
-      "Snow"
-    )
+    humidity,
+    humidity + 20
+  )
+  
+  # Cap for extreme values
+  humidity <- max(0, humidity)
+  humidity <- min(100, humidity)
 ```
 
 
 
 ## Atmosphere pressure
-Atmosphere pressure was left constant for simplicity with tiny random changes and drop in pressure due to rains and small decrease with elevation
+Atmosphere pressure was left near constant for simplicity with tiny random changes and drop in pressure due to rains and small decrease with elevation
 
-```
+```R
 atm_pressure <- 
     1100 +                                     # base value
     runif(n = 1, min = -20,max = 20) +         # boring without random
