@@ -20,6 +20,10 @@ cfg$fit <- list(
   daily =  fit$temperature_daily_fit_poly_init()
 )
 
+cfg$stations <-
+  suppressMessages(
+    read_csv("./io/input/weather_stations.csv")
+  )
 
 
 debug_message_end("10 init.R <<\n\n")

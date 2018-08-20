@@ -79,9 +79,24 @@ sim_weather <- function(
 # Check the feasibility of the coord --------------------------------------
 
   stopifnot(class(coord) == "list")
-  stopifnot(class(coord$lat) == "numeric", !is.na(coord$lat), coord$lat <= 90, coord$lat >= -90)
-  stopifnot(class(coord$lon) == "numeric", !is.na(coord$lon), coord$lon <= 90, coord$lon >= -90)
-  stopifnot(class(coord$alt) == "numeric", !is.na(coord$alt), coord$alt <= 9000, coord$alt >= 0)
+  stopifnot(
+    class(coord$lat) %in% c("numeric", "integer"),
+    !is.na(coord$lat),
+    coord$lat <= 180,
+    coord$lat >= -180
+  )
+  stopifnot(
+    class(coord$lon) %in% c("numeric", "integer"),
+    !is.na(coord$lon),
+    coord$lon <= 180,
+    coord$lon >= -180
+  )
+  stopifnot(
+    class(coord$alt) %in% c("numeric", "integer"),
+    !is.na(coord$alt),
+    coord$alt <= 9000,
+    coord$alt >= 0
+  )
   
   
   

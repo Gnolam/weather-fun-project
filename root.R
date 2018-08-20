@@ -3,12 +3,12 @@ if(1){
   gc()
   cat("\014")  
 
-ver.num <- "0.05 " # should be 5 symbols
+ver.num <- "0.06 " # should be 5 symbols
   
 base::message("     ******************************************************")
 base::message("    ***                                                ***")
 base::message(paste0("   ***  The Weather fun project               v.", ver.num, " ***"))
-base::message("  ***    implementing [1].sp4 ticket                 ***")
+base::message("  ***    implementing [2].sp5 card                   ***")
 base::message(" ***                                                ***")
 base::message("******************************************************")
 }
@@ -33,6 +33,9 @@ res.status <- tryCatch({
   # All functions related to curve fitting and approximation
   sys$source_Rs(folder =  "R/fit", fit <- new.env())
   
+
+  # All functions related to curve fitting and approximation
+  sys$source_Rs(folder =  "R/simulations/", sim <- new.env())
   
   
 # Main sequence -----------------------------------------------------------
