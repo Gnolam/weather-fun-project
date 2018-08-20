@@ -85,6 +85,15 @@ sim_weather_1_station <- function(
   }
   #cat("\n")
   
-  station_result$staion <- IATA_code
+  station_result %<>%
+    mutate(
+      triplet = paste0(
+        stations_match$Lat %>% round(digits = 2),",",
+        stations_match$Lon %>% round(digits = 2),",",
+        stations_match$Alt %>% round(digits = 0)
+      ),
+        station = IATA_code      
+      )
+  
   station_result
 }

@@ -63,7 +63,9 @@ process_single_task <- function(fname) {
   
 
 # Exporting the results ---------------------------------------------------
-  res %>% write_csv(
+  res %>%  
+    
+    write_csv(
     path = fname_output,
     col_names = TRUE 
     
