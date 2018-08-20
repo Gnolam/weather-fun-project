@@ -15,8 +15,8 @@ debug_message_l2("[XX] Current resting")
 
 
 
-res <- 
-  sim$sim_weather_1_station(ymd_hms("2018-08-17 01:05:11"), IATA_code = "HBA")
+#res <- 
+#  sim$sim_weather_1_station(ymd_hms("2018-08-17 01:05:11"), IATA_code = "HBA")
  
 
 # Debug section -----------------------------------------------------------
