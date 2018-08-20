@@ -64,12 +64,16 @@ process_single_task <- function(fname) {
 
 # Exporting the results ---------------------------------------------------
   res %>%  
-    
+    select(
+      station, triplet, local_time, conditions, temperature, pressure, humidity
+    ) %>%  
     write_csv(
     path = fname_output,
     col_names = TRUE 
     
   )  
+  
+  
     
     
   debug_message_end("process_single_task()\n")
