@@ -33,6 +33,10 @@ per EACH of the station defined in the `io/input/weather_stations.csv` database.
 
 `step_size` can be in one of the following types: "days", "mins", "secs", "hours", "months", "years"
 
+`csv_header` regulates if we want to add the header to an output file.
+Please not that many systems __require__ header-less files in order to 
+perform at a high speed.
+
 Example of the several lines of the output file 
 ```
 CBR|-35.31,149.2,575|2018-02-17T01:05:11Z|Clear|+18.9|1070.1|77.0
