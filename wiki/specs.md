@@ -50,3 +50,9 @@ This document serves as a Wiki and a master plan for the project
 
 ## Working notes
 Year part is ignored in the simulation. Only part of the year and part of the day
+
+We consider altitude to be within `troposphere` - before 11km. Otherwise the relationship alt-temp is not monotonic
+"Calculate the temperature at the altitude of your choice in the troposphere. Temperatures in the troposphere drop an average of 6.5 degrees C per kilometer" ~  https://sciencing.com/tutorial-calculate-altitude-temperature-8788701.html
+
+
+

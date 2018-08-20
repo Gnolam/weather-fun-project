@@ -10,6 +10,7 @@ debug_message_l2("adding sim_weather() v1")
 #'
 #' @param chr_dt pass this param if it is more convenient to leave the checks to a function
 #' @param dt a valid POSIXt date 
+#' @param coord a list of 3 variables : lat, lon, alt. All numberic. 
 #'
 #' @return list object. in v1 just temperature inside
 #' @export
@@ -17,7 +18,12 @@ debug_message_l2("adding sim_weather() v1")
 #' @examples
 sim_weather <- function(
     chr_dt = NULL, 
-    dt = NULL      
+    dt = NULL,
+    coord = list(
+      lat = 0, # -90..+90
+      lon = 0, # -90..+90
+      alt = 0  # 0..9000 (in meters)
+    )
   ){
   # Hi!
   debug_message_l2("~> sim_weather()")
@@ -70,6 +76,15 @@ sim_weather <- function(
   }
   
 
+# Check the feasibility of the coord --------------------------------------
+
+  stopifnot(class(coord) == "list")
+  stopifnot(class(coord$lat) == "numeric", !is.na(coord$lat), coord$lat <= 90, coord$lat >= -90)
+  stopifnot(class(coord$lon) == "numeric", !is.na(coord$lon), coord$lon <= 90, coord$lon >= -90)
+  stopifnot(class(coord$alt) == "numeric", !is.na(coord$alt), coord$alt <= 9000, coord$alt >= 0)
+  
+  
+  
 
 # Relative position within month ------------------------------------------
   # Note: YEAR is ignored essentially
@@ -79,6 +94,7 @@ sim_weather <- function(
   rel_month <- lubridate::month(dt)  + rel_day_within_month
   
   # Pick the temperature withing annual curve
+  # the shift by +12 is due to implementation of the poly fitting method
   temperature_annual <- predict(cfg$fit$annual, data.frame(x = rel_month + 12))
 
   
@@ -94,12 +110,37 @@ sim_weather <- function(
       ) %/%
     as.duration(seconds(1))/3600
   
+  # the shift by +24 is due to implementation of the poly fitting method
   temperature_daily <- predict(cfg$fit$daily, data.frame(x = rel_hour_within_day + 24))
   
 
+
+# lat, alt temperature modifiers ------------------------------------------
+  # Take Sydney coord as a reference
+  # lat -33.865143
+  
+  
+  # Calculate difference vs. Sydney
+  # Positive numver means closer to Equator and thus warmer
+  # We ignore here presence of the deserts etc.
+  # for each 1 degree in latitude we assume the temperature changes by .5 degree
+  # Thus Darwin is ~10 warmer vs Sydney
+  #   
+  temperature_latitude <- (coord$lat + 33.865143) * cfg$latitude_modifier
+  
+  
+
+# Altitude modifer --------------------------------------------------------
+  # Formula is taken from: https://sciencing.com/tutorial-calculate-altitude-temperature-8788701.html
+  temperature_altitude <- coord$alt / 1000 * cfg$altitude_modifier
+  
+  
 # pack into final temperature estimation ----------------------------------
   final_temperature_prediction <-
-    temperature_annual + temperature_daily 
+    temperature_annual +
+    temperature_daily +
+    temperature_latitude +
+    temperature_altitude
   
   return(final_temperature_prediction)
 }
@@ -116,7 +157,7 @@ if (0) {
     dt = lubridate::ymd_hms("2018-02-17 01:05:11")
     
     dt <- lubridate::ymd_hms("2018-02-28 01:05:11")
-    (lubridate::day(dt)-1)/(    days_in_month(dt)-1)
+    (lubridate::day(dt) - 1)/(days_in_month(dt))
   }
 
   if ( 0 ) {
